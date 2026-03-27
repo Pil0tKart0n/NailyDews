@@ -4,13 +4,32 @@ import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NailyDews - AI News That Matters",
+  title: {
+    default: "NailyDews - AI News, Curated Daily",
+    template: "%s | NailyDews",
+  },
   description:
-    "Your daily AI intelligence brief. Curated, summarized, and ranked AI news from 20+ sources, delivered every evening.",
+    "Your daily AI digest. 50+ sources distilled into one clean newspaper every evening at 19:00 CET. No noise. No ads. Just what matters in AI.",
+  keywords: [
+    "AI news", "artificial intelligence", "daily digest", "LLM news",
+    "machine learning", "AI newsletter", "OpenAI", "Anthropic", "Claude",
+    "GPT", "AI research", "AI tools",
+  ],
   openGraph: {
-    title: "NailyDews - AI News That Matters",
-    description: "Your daily AI intelligence brief.",
+    title: "NailyDews - AI News, Curated Daily",
+    description:
+      "50+ sources. One digest. Every evening. The AI newspaper for people who build.",
     type: "website",
+    siteName: "NailyDews",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NailyDews - AI News, Curated Daily",
+    description: "50+ sources. One digest. Every evening at 19:00 CET.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

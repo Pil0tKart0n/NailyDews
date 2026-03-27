@@ -17,18 +17,23 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   business_regulation: Briefcase,
 };
 
-export function CategorySection({ section }: { section: Section }) {
+interface CategorySectionProps {
+  section: Section;
+  compact?: boolean;
+}
+
+export function CategorySection({ section, compact = false }: CategorySectionProps) {
   const Icon = ICONS[section.category] || Newspaper;
 
   return (
-    <section className="mb-10">
-      <div className="flex items-center gap-2 border-b-2 border-ink pb-2 mb-5">
-        <Icon className="w-5 h-5" />
-        <h2 className="font-serif text-xl font-bold uppercase tracking-wide">
+    <section className={compact ? "mb-8" : "mb-10"}>
+      <div className={`flex items-center gap-2 border-b-2 border-ink pb-2 ${compact ? "mb-3" : "mb-5"}`}>
+        <Icon className={compact ? "w-4 h-4" : "w-5 h-5"} />
+        <h2 className={`font-serif font-bold uppercase tracking-wide ${compact ? "text-base" : "text-xl"}`}>
           {section.label}
         </h2>
         <span className="text-xs text-ink-muted ml-auto">
-          {section.articles.length} {section.articles.length === 1 ? "article" : "articles"}
+          {section.articles.length}
         </span>
       </div>
 
@@ -37,7 +42,8 @@ export function CategorySection({ section }: { section: Section }) {
           <ArticleCard
             key={article.id}
             article={article}
-            featured={section.category === "top_stories" && i === 0}
+            featured={!compact && section.category === "top_stories" && i === 0}
+            compact={compact}
           />
         ))}
       </div>
