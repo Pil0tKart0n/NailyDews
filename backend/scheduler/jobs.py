@@ -10,6 +10,9 @@ from crawlers.rss_crawler import RSSCrawler
 from crawlers.arxiv_crawler import ArxivCrawler
 from crawlers.hackernews_crawler import HackerNewsCrawler
 from crawlers.github_crawler import GitHubCrawler
+from crawlers.reddit_crawler import RedditCrawler
+from crawlers.web_scraper import WebScraper
+from crawlers.discord_scraper import DiscordScraper
 from db.connection import async_session
 from db.models import Source
 from digest.generator import generate_digest
@@ -27,12 +30,18 @@ def get_crawler_class(source: Source):
     """Get the appropriate crawler class for a source."""
     if source.source_type == "rss":
         return RSSCrawler
+    if source.source_type == "scraper":
+        return WebScraper
+    if source.source_type == "discord":
+        return DiscordScraper
     if "arxiv" in source.slug:
         return ArxivCrawler
     if "hackernews" in source.slug:
         return HackerNewsCrawler
     if "github" in source.slug:
         return GitHubCrawler
+    if "reddit" in source.slug:
+        return RedditCrawler
     return RSSCrawler  # fallback
 
 

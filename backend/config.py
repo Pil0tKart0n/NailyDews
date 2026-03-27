@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     # Claude API
     anthropic_api_key: str = ""
 
+    # Discord (optional, for Discord channel scraping)
+    discord_bot_token: str = ""
+
     # App
     app_env: str = "production"
     app_secret_key: str = "change_me_random_string"
