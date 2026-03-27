@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  body {
+    @apply bg-paper-50 text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent-blue/20;
+  }
+}
+
+/* Newspaper column layout for wider screens */
+@media (min-width: 768px) {
+  .newspaper-columns {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .newspaper-columns > * {
+    break-inside: avoid;
+  }
+}
