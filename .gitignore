@@ -38,3 +38,4 @@ logs/
 # Database dumps
 backups/
 *.sql.gz
+screenshot_*.png
