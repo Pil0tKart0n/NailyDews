@@ -1,61 +1,123 @@
 import { getTodayDigest } from "@/lib/api";
 import { EditorialSummary } from "@/components/EditorialSummary";
 import { CategorySection } from "@/components/CategorySection";
-import { Newspaper, Rss, Brain, Clock, Shield } from "lucide-react";
+import { Rss, Brain, Clock, Shield, Zap, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export const revalidate = 300;
 
-function HeroExplainer() {
+function HeroLanding() {
   return (
-    <div className="text-center py-16 md:py-24">
-      <Newspaper className="w-12 h-12 mx-auto text-ink-muted mb-5" />
-      <h2 className="font-serif text-3xl md:text-4xl font-black mb-3">
-        Your AI News. Curated Daily.
-      </h2>
-      <p className="text-ink-muted max-w-lg mx-auto mb-8 leading-relaxed">
-        Every evening at 19:00 CET, we publish one clean digest of everything
-        that happened in AI today. No noise. No clickbait. Just what matters.
-      </p>
+    <>
+      {/* Full-width hero - breaks out of the max-w container */}
+      <div className="-mx-4 -mt-8 mb-12">
+        <div className="hero-gradient text-white">
+          <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse-dot" />
+                <span className="text-sm text-blue-200 font-medium">
+                  Collecting from 50+ sources right now
+                </span>
+              </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-10">
-        <div className="text-center p-3">
-          <Rss className="w-5 h-5 mx-auto mb-2 text-accent-blue" />
-          <p className="text-2xl font-black">50+</p>
-          <p className="text-xs text-ink-muted">Sources</p>
+              <h2 className="text-4xl md:text-6xl font-serif font-black leading-tight mb-6">
+                All of AI.{" "}
+                <span className="gradient-text">One Daily Read.</span>
+              </h2>
+
+              <p className="text-lg md:text-xl text-blue-100 leading-relaxed mb-8 max-w-2xl">
+                Every evening at 19:00 CET, we publish one curated digest of everything
+                that happened in AI today. 50+ sources filtered, ranked, and summarized.
+                No noise. No ads. Just what matters.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/about"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-navy-900 font-semibold rounded-lg hover:bg-blue-50 transition-colors"
+                >
+                  See How It Works
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/archive"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/25 text-white font-medium rounded-lg hover:bg-white/10 transition-colors"
+                >
+                  Browse Past Digests
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="text-center p-3">
-          <Brain className="w-5 h-5 mx-auto mb-2 text-accent-blue" />
-          <p className="text-2xl font-black">5</p>
-          <p className="text-xs text-ink-muted">Sections</p>
-        </div>
-        <div className="text-center p-3">
-          <Clock className="w-5 h-5 mx-auto mb-2 text-accent-blue" />
-          <p className="text-2xl font-black">19:00</p>
-          <p className="text-xs text-ink-muted">Daily at CET</p>
-        </div>
-        <div className="text-center p-3">
-          <Shield className="w-5 h-5 mx-auto mb-2 text-accent-blue" />
-          <p className="text-2xl font-black">100%</p>
-          <p className="text-xs text-ink-muted">Source-linked</p>
+
+        {/* Stats bar */}
+        <div className="bg-white border-b border-ink/5 shadow-sm">
+          <div className="max-w-6xl mx-auto px-4 py-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                  <Rss className="w-5 h-5 text-accent-blue" />
+                </div>
+                <div>
+                  <p className="text-2xl font-black">50+</p>
+                  <p className="text-xs text-ink-muted">Sources Monitored</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                  <Brain className="w-5 h-5 text-accent-blue" />
+                </div>
+                <div>
+                  <p className="text-2xl font-black">5</p>
+                  <p className="text-xs text-ink-muted">News Sections</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-accent-blue" />
+                </div>
+                <div>
+                  <p className="text-2xl font-black">19:00</p>
+                  <p className="text-xs text-ink-muted">Published Daily CET</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-accent-blue" />
+                </div>
+                <div>
+                  <p className="text-2xl font-black">100%</p>
+                  <p className="text-xs text-ink-muted">Source-Linked</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <Link
-          href="/about"
-          className="inline-block px-5 py-2.5 bg-ink text-paper-50 font-medium rounded hover:bg-ink-light transition-colors text-sm"
-        >
-          Learn How It Works
-        </Link>
-        <Link
-          href="/archive"
-          className="inline-block px-5 py-2.5 border border-ink/20 font-medium rounded hover:border-ink/40 transition-colors text-sm"
-        >
-          Browse Past Digests
-        </Link>
+      {/* What you get section */}
+      <div className="mb-16">
+        <h3 className="font-serif text-2xl font-bold text-center mb-8">
+          Five sections. Everything you need.
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          {[
+            { icon: Zap, title: "Top Stories", desc: "The biggest AI news of the day" },
+            { icon: Brain, title: "Models", desc: "New releases, benchmarks, capabilities" },
+            { icon: Rss, title: "Tools", desc: "Frameworks, APIs, developer resources" },
+            { icon: Shield, title: "Research", desc: "Papers, breakthroughs, findings" },
+            { icon: Clock, title: "Business", desc: "Funding, regulation, partnerships" },
+          ].map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="text-center p-5 rounded-xl border border-ink/5 bg-white hover:shadow-md transition-shadow">
+              <Icon className="w-6 h-6 mx-auto mb-3 text-accent-blue" />
+              <h4 className="font-bold text-sm mb-1">{title}</h4>
+              <p className="text-xs text-ink-muted">{desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -65,7 +127,7 @@ export default async function HomePage() {
   try {
     digest = await getTodayDigest();
   } catch {
-    return <HeroExplainer />;
+    return <HeroLanding />;
   }
 
   return (
@@ -73,7 +135,7 @@ export default async function HomePage() {
       <EditorialSummary digest={digest} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main content: Top Stories + other sections */}
+        {/* Main content */}
         <div className="lg:col-span-2">
           {digest.sections
             .filter((s) => s.category === "top_stories")
@@ -96,7 +158,7 @@ export default async function HomePage() {
             ))}
         </div>
 
-        {/* Sidebar: Business & lighter sections */}
+        {/* Sidebar */}
         <aside className="lg:border-l lg:border-ink/5 lg:pl-8">
           {digest.sections
             .filter((s) => s.category === "business_regulation")
@@ -106,8 +168,7 @@ export default async function HomePage() {
               </div>
             ))}
 
-          {/* Source transparency box */}
-          <div className="mt-8 p-4 bg-paper-100 rounded border border-ink/5">
+          <div className="mt-8 p-4 bg-paper-100 rounded-lg border border-ink/5">
             <h3 className="font-serif font-bold text-sm mb-2">
               About This Digest
             </h3>
@@ -126,7 +187,7 @@ export default async function HomePage() {
         </aside>
       </div>
 
-      {digest.sections.length === 0 && <HeroExplainer />}
+      {digest.sections.length === 0 && <HeroLanding />}
     </div>
   );
 }

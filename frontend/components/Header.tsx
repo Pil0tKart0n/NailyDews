@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Newspaper, Clock, BookOpen } from "lucide-react";
+import { Clock } from "lucide-react";
 
 export function Header() {
   const today = new Date().toLocaleDateString("en-US", {
@@ -10,15 +10,15 @@ export function Header() {
   });
 
   return (
-    <header className="border-b-4 border-double border-ink">
+    <header className="bg-white border-b border-ink/10">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Top bar with date and nav */}
-        <div className="flex items-center justify-between py-2 text-xs text-ink-muted border-b border-ink/10">
+        {/* Top bar */}
+        <div className="flex items-center justify-between py-2.5 text-xs text-ink-muted border-b border-ink/5">
           <div className="flex items-center gap-2">
             <Clock className="w-3 h-3" />
             <time>{today}</time>
           </div>
-          <nav className="flex gap-4">
+          <nav className="flex gap-5">
             <Link href="/" className="hover:text-ink transition-colors font-medium">
               Today
             </Link>
@@ -32,40 +32,16 @@ export function Header() {
         </div>
 
         {/* Masthead */}
-        <div className="text-center py-5 md:py-6">
+        <div className="text-center py-4 md:py-5">
           <Link href="/" className="inline-block">
-            <h1 className="font-serif text-4xl md:text-6xl font-black tracking-tight">
+            <h1 className="font-serif text-3xl md:text-5xl font-black tracking-tight text-navy-900">
               NailyDews
             </h1>
           </Link>
-          <p className="text-xs md:text-sm text-ink-muted mt-1 tracking-widest uppercase">
+          <p className="text-[10px] md:text-xs text-ink-muted mt-1 tracking-[0.2em] uppercase">
             50+ Sources. One Digest. Every Evening at 19:00 CET.
           </p>
         </div>
-
-        {/* Category nav */}
-        <nav className="flex items-center justify-center gap-4 md:gap-6 py-3 text-xs md:text-sm font-medium border-t border-ink/10 overflow-x-auto">
-          <a href="#top_stories" className="flex items-center gap-1.5 whitespace-nowrap hover:text-accent-blue transition-colors">
-            <span className="hidden md:inline text-accent-red">&#9679;</span>
-            Top Stories
-          </a>
-          <span className="text-ink/15">|</span>
-          <a href="#models_releases" className="whitespace-nowrap hover:text-accent-blue transition-colors">
-            Models & Releases
-          </a>
-          <span className="text-ink/15">|</span>
-          <a href="#tools_frameworks" className="whitespace-nowrap hover:text-accent-blue transition-colors">
-            Tools & Frameworks
-          </a>
-          <span className="text-ink/15">|</span>
-          <a href="#research_papers" className="whitespace-nowrap hover:text-accent-blue transition-colors">
-            Research
-          </a>
-          <span className="text-ink/15">|</span>
-          <a href="#business_regulation" className="whitespace-nowrap hover:text-accent-blue transition-colors">
-            Business & Policy
-          </a>
-        </nav>
       </div>
     </header>
   );

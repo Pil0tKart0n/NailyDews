@@ -8,9 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Georgia", "Cambria", "Times New Roman", "serif"],
+        serif: ["Playfair Display", "Georgia", "Cambria", "serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
       },
       colors: {
         paper: {
@@ -26,9 +25,9 @@ const config: Config = {
           900: "#4d453b",
         },
         ink: {
-          DEFAULT: "#1a1a1a",
-          light: "#4a4a4a",
-          muted: "#7a7a7a",
+          DEFAULT: "#0f172a",
+          light: "#334155",
+          muted: "#64748b",
         },
         accent: {
           blue: "#2563eb",
@@ -36,6 +35,13 @@ const config: Config = {
           yellow: "#ca8a04",
           orange: "#ea580c",
           red: "#dc2626",
+        },
+        navy: {
+          50: "#f0f4ff",
+          100: "#e0e8ff",
+          700: "#1e3a5f",
+          800: "#172e4a",
+          900: "#0f172a",
         },
       },
     },
