@@ -20,10 +20,12 @@ class GitHubCrawler(BaseCrawler):
         articles = []
 
         # Search for recently created AI repos with stars
+        from datetime import timedelta
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
         query = "topic:machine-learning OR topic:llm OR topic:artificial-intelligence"
         url = "https://api.github.com/search/repositories"
         params = {
-            "q": f"{query} created:>2026-03-20 stars:>10",
+            "q": f"{query} created:>{cutoff} stars:>10",
             "sort": "stars",
             "order": "desc",
             "per_page": 30,

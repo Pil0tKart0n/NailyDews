@@ -29,6 +29,18 @@ async def rank_articles(db: AsyncSession, batch_size: int = 100) -> int:
 
     now = datetime.now(timezone.utc)
 
+    # Pre-fetch all cluster counts in one query (avoid N+1)
+    cluster_ids = {a.cluster_id for a in articles if a.cluster_id}
+    cluster_counts: dict[int, int] = {}
+    if cluster_ids:
+        counts_result = await db.execute(
+            select(Article.cluster_id, func.count(Article.id))
+            .where(Article.cluster_id.in_(cluster_ids))
+            .group_by(Article.cluster_id)
+        )
+        for cid, cnt in counts_result:
+            cluster_counts[cid] = cnt
+
     for article in articles:
         score = 0.0
 
@@ -50,10 +62,7 @@ async def rank_articles(db: AsyncSession, batch_size: int = 100) -> int:
 
         # Cluster size (0-15 points) - more sources = bigger story
         if article.cluster_id:
-            cluster_count_result = await db.execute(
-                select(func.count(Article.id)).where(Article.cluster_id == article.cluster_id)
-            )
-            cluster_count = cluster_count_result.scalar() or 1
+            cluster_count = cluster_counts.get(article.cluster_id, 1)
             score += min(15, cluster_count * 3)
 
         # Content signals (0-15 points)

@@ -65,7 +65,7 @@ class Article(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-    source = relationship("Source", back_populates="articles")
+    source = relationship("Source", back_populates="articles", lazy="selectin")
 
 
 class Digest(Base):
@@ -82,7 +82,7 @@ class Digest(Base):
     published_at = Column(DateTime(timezone=True))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    digest_articles = relationship("DigestArticle", back_populates="digest", cascade="all, delete-orphan")
+    digest_articles = relationship("DigestArticle", back_populates="digest", cascade="all, delete-orphan", lazy="selectin")
 
 
 class DigestArticle(Base):
@@ -97,7 +97,7 @@ class DigestArticle(Base):
     is_top_story = Column(Boolean, default=False)
 
     digest = relationship("Digest", back_populates="digest_articles")
-    article = relationship("Article")
+    article = relationship("Article", lazy="selectin")
 
 
 class LLMUsage(Base):

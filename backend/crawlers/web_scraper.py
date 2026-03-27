@@ -130,7 +130,7 @@ class WebScraper(BaseCrawler):
                 "title": title,
                 "raw_content": content,
                 "author": None,
-                "published_at": datetime.now(timezone.utc),  # Best guess for scraped content
+                "published_at": None,  # Scraped content has no reliable date
                 "external_id": url,
                 "image_url": None,
             })

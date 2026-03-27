@@ -6,7 +6,7 @@ import { Calendar } from "lucide-react";
 export const revalidate = 300;
 
 export default async function ArchivePage() {
-  let digests;
+  let digests: Awaited<ReturnType<typeof listDigests>> = [];
 
   try {
     digests = await listDigests(60);

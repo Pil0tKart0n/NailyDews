@@ -3,7 +3,6 @@ from datetime import date
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
 from db.connection import get_db
 from db.models import Article, Digest, DigestArticle

@@ -21,10 +21,7 @@ class ArxivCrawler(BaseCrawler):
         for entry in feed.entries:
             # arXiv entries have id like http://arxiv.org/abs/2403.12345v1
             arxiv_id = entry.get("id", "")
-            url = arxiv_id.replace("/abs/", "/abs/")  # Ensure abs URL
-
-            # Get PDF link
-            pdf_url = arxiv_id.replace("/abs/", "/pdf/")
+            url = arxiv_id
 
             # Parse date
             published_at = None

@@ -26,12 +26,12 @@ async def health_check(db: AsyncSession = Depends(get_db)):
     }
 
 
-@router.get("/api/stats")
+@router.get("/stats")
 async def get_stats(db: AsyncSession = Depends(get_db)):
     """Get system stats."""
-    sources_count = (await db.execute(select(func.count(Source.id)).where(Source.is_active == True))).scalar()
-    articles_count = (await db.execute(select(func.count(Article.id)))).scalar()
-    digests_count = (await db.execute(select(func.count(Digest.id)).where(Digest.status == "published"))).scalar()
+    sources_count = (await db.execute(select(func.count(Source.id)).where(Source.is_active == True))).scalar() or 0
+    articles_count = (await db.execute(select(func.count(Article.id)))).scalar() or 0
+    digests_count = (await db.execute(select(func.count(Digest.id)).where(Digest.status == "published"))).scalar() or 0
 
     # Today's LLM costs
     today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
