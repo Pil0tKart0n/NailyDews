@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.models import Article
-from llm.client import llm_client, SONNET
+from llm.client import llm_client, QUALITY
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ async def summarize_articles(db: AsyncSession, batch_size: int = 10) -> int:
             data = await llm_client.complete_json(
                 prompt=prompt,
                 system=SYSTEM_PROMPT,
-                model=SONNET,
+                model=QUALITY,
                 max_tokens=512,
                 db=db,
                 task="summarize",

@@ -12,8 +12,9 @@ class Settings(BaseSettings):
     # Redis
     redis_url: str = "redis://redis:6379/0"
 
-    # Claude API
-    anthropic_api_key: str = ""
+    # LLM APIs
+    openai_api_key: str = ""
+    gemini_api_key: str = ""
 
     # Discord (optional, for Discord channel scraping)
     discord_bot_token: str = ""

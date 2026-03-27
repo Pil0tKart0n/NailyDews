@@ -5,7 +5,7 @@ from sqlalchemy import select, func, and_
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.models import Article, Digest, DigestArticle
-from llm.client import llm_client, SONNET
+from llm.client import llm_client, QUALITY
 
 logger = logging.getLogger(__name__)
 
@@ -90,7 +90,7 @@ async def generate_digest(db: AsyncSession, target_date: date | None = None) -> 
             data = await llm_client.complete_json(
                 prompt=prompt,
                 system=EDITORIAL_SYSTEM,
-                model=SONNET,
+                model=QUALITY,
                 max_tokens=512,
                 db=db,
                 task="editorial",
